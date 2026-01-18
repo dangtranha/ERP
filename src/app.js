@@ -1,9 +1,10 @@
+require("dotenv").config()
 const express = require("express");
 const morgan = require("morgan");
 const { default: helmet } = require("helmet");
 const compression = require("compression");
-const { countConnect, checkOverload } = require("./helpers/check.connection");
 const app = express();
+// console.log(`PROCESS:: `,process.env)
 
 // init middlewares
 app.use(morgan("dev"));
@@ -12,7 +13,8 @@ app.use(compression());
 
 // init db
 require("./dbs/init.mongodb");
-checkOverload();
+// checkOverload();
+
 // init routes
 app.get("/", (req, res, next) => {
     const strTest = "HELLO WORLD";
