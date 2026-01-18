@@ -1,24 +1,29 @@
+require("dotenv").config()
 const express = require("express");
 const morgan = require("morgan");
 const { default: helmet } = require("helmet");
 const compression = require("compression");
 const app = express();
+// console.log(`PROCESS:: `,process.env)
 
 // init middlewares
 app.use(morgan("dev"));
 app.use(helmet());
-// app.use(compression());
+app.use(compression());
+
 // init db
+require("./dbs/init.mongodb");
+// checkOverload();
 
 // init routes
 app.get("/", (req, res, next) => {
-  const strTest = "HELLO WORLD";
-  return res.status(200).json({
-    message: "Welcome my boy",
-    metadata: strTest.repeat(1000000),
-  });
+    const strTest = "HELLO WORLD";
+    return res.status(200).json({
+        message: "Welcome my boy",
+    });
 });
 
+// create develop branch
 // handling error
 
 module.exports = app;
