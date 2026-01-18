@@ -1,7 +1,9 @@
 "use strict";
 const { default: mongoose } = require("mongoose");
 const { countConnect } = require("../helpers/check.connection");
-const connectString = `mongodb://erp_user:erp123@localhost:27017/ERP`;
+const {db:{host,name,port,username,password}} = require('../configs/config.mongodb')
+const connectString = `mongodb://${username}:${password}@${host}:${port}/${name}`;
+console.log(`connectString`,connectString)
 class Database {
     constructor() {
         this.connect();
